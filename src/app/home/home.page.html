@@ -1,0 +1,46 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-card>
+   <ion-card-header>
+     <ion-card-tittle>Sistema Etec</ion-card-tittle>
+   </ion-card-header>
+   
+   <form [formGroup]="formLogin" (ngSubmit)="login()">
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-imput formControlName="email" type="email"></ion-imput>
+      <ng-container *ngFor="let erro of mensagens_validacao.email">
+        <span 
+        *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-imput formControlName="senha" type="password"></ion-imput>
+      <ng-container *ngFor="let erro of mensagens_validacao.senha">
+        <span 
+        *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+
+    <br>
+    <ion-button expand="block" color="primary" type="submit">LOGIN!</ion-button>
+    <ion-button expand="block" fill="outline" color="primary" routerLink="/criar-conta">CRIAR CONTA</ion-button>
+
+   </form>
+ </ion-card>
+</ion-content>
