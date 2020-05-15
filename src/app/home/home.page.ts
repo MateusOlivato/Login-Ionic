@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 //importações necessárias
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { UsuarioService } from '../services/usuario.service';
 
 
 /*
@@ -31,7 +32,10 @@ export class HomePage {
 
 
   }
-  constructor(public formBuilder: FormBuilder, public alertController: AlertController, public router: Router) {
+  constructor(public formBuilder: FormBuilder,
+     public alertController: AlertController,
+      public router: Router,
+      public usuarioService: UsuarioService) {
 
     //Monta o formulário
     this.formLogin = formBuilder.group({
@@ -41,12 +45,12 @@ export class HomePage {
     });
   }
 
-  public login(){
+  public async login(){
     if(this.formLogin.valid){
       let email = this.formLogin.value.email;
       let senha = this.formLogin.value.senha;
 
-      if(email == 'admin@admin.com' && senha == "123456"){
+      if(await this.usuarioService.login(email, senha)){
         this.router.navigateByUrl('painel-usuario');
       }else{
         this.alertUserInvalid()

@@ -1,9 +1,120 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>criarConta</ion-title>
+<ion-header >
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Criar conta
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-tittle>Sistema Etec</ion-card-tittle>
+    </ion-card-header>
+    
 
+    <form [formGroup]="formCadastro" (ngSubmit)="salvarUsuario()">
+     <ion-item>
+       <ion-label position="floating">Nome completo</ion-label>
+       <ion-imput formControlName="nome" type="text"></ion-imput>
+       <ng-container *ngFor="let erro of mensagens_validacao.nome">
+         <span 
+         *ngIf="formCadastro.get('nome').hasError(erro.tipo) && (formCadastro.get('nome').dirty || formCadastro.get('nome').touched)"
+         class="msg.erro">
+       {{erro.mensagem}}
+       </span>
+       </ng-container>
+     </ion-item>
+     
+     <ion-item>
+       <ion-label>Sexo</ion-label>
+        <ion-select formControlName="sexo" placeholder="Selecione...">
+          <ion-select-option value="F">Feminino</ion-select-option>
+          <ion-select-option value="M">Masculino</ion-select-option>
+        </ion-select>
+       <ng-container *ngFor="let erro of mensagens_validacao.senha">
+         <span 
+         *ngIf="formCadastro.get('sexo').hasError(erro.tipo) && (formCadastro.get('sexo').dirty || formCadastro.get('sexo').touched)"
+         class="msg.erro">
+       {{erro.mensagem}}
+       </span>
+       </ng-container>
+     </ion-item>
+ 
+     <ion-item>
+      <ion-label position="staked">CPF</ion-label>
+      <ion-imput formControlName="cpf" type="text" max="11" placeholder="somente numeros"></ion-imput>
+      <ng-container *ngFor="let erro of mensagens_validacao.nome">
+        <span 
+        *ngIf="formCadastro.get('cpf').hasError(erro.tipo) && (formCadastro.get('cpf').dirty || formCadastro.get('cpf').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label position="staked">Data de nascimento</ion-label>
+      <ion-datetime formControlName="dataNascimento" display-format="DD/MM/YYYY"
+      placeholder="Selecione a data"></ion-datetime>
+      <ng-container *ngFor="let erro of mensagens_validacao.nome">
+        <span 
+        *ngIf="formCadastro.get('dataNascimento').hasError(erro.tipo) && (formLogin.get('dataNascimento').dirty || formLogin.get('dataNascimento').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-imput formControlName="email" type="email"></ion-imput>
+      <ng-container *ngFor="let erro of mensagens_validacao.email">
+        <span 
+        *ngIf="formCadastro.get('email').hasError(erro.tipo) && (formCadastro.get('email').dirty || formCadastro.get('email').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-imput formControlName="senha" type="password"></ion-imput>
+      <ng-container *ngFor="let erro of mensagens_validacao.senha">
+        <span 
+        *ngIf="formCadastro.get('senha').hasError(erro.tipo) && (formCadastro.get('senha').dirty || formCadastro.get('senha').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Confirmar Senha</ion-label>
+      <ion-imput formControlName="confirmaSenha" type="password"></ion-imput>
+      <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">
+        <span 
+        *ngIf="formCadastro.get('confirmaSenha').hasError(erro.tipo) && (formCadastro.get('confirmaSenha').dirty || formCadastro.get('confirmaSenha').touched)"
+        class="msg.erro">
+      {{erro.mensagem}}
+      </span>
+      </ng-container>
+    </ion-item>
+
+
+
+     <br>
+     <ion-button expand="block" color="tertiary" type="submit">SALVAR!</ion-button>
+ 
+    </form>
+  
+  </ion-card>
 </ion-content>

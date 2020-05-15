@@ -1,46 +1,60 @@
-<ion-header >
-  <ion-toolbar color="primary">
+<ion-header>
+  <ion-toolbar color="tertiary">
     <ion-title>
       Login
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!-- Início conteúdo da página-->
 <ion-content>
- <ion-card>
-   <ion-card-header>
-     <ion-card-tittle>Sistema Etec</ion-card-tittle>
-   </ion-card-header>
-   
-   <form [formGroup]="formLogin" (ngSubmit)="login()">
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-imput formControlName="email" type="email"></ion-imput>
+  <ion-card>
+    <!--Header-->
+    <ion-card-header>
+      <ion-card-title>Sistema ETEC</ion-card-title>
+    </ion-card-header>
+    <!--Fim header-->
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+ 
+      <!--Ion item 1-->
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+        <ng-container *ngFor="let erro of mensagens_validacao.email">
+          <span 
+          *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"
+          class="msg-erro">
+        {{erro.mensagem}}
+        </span>
+        </ng-container>
+        <!--Container (usado depois)
+ 
       <ng-container *ngFor="let erro of mensagens_validacao.email">
-        <span 
-        *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"
-        class="msg.erro">
-      {{erro.mensagem}}
-      </span>
+        <span
+          *ngIf="formLogin.get(email).hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email')"
       </ng-container>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label position="stacked">Senha</ion-label>
-      <ion-imput formControlName="senha" type="password"></ion-imput>
-      <ng-container *ngFor="let erro of mensagens_validacao.senha">
-        <span 
-        *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"
-        class="msg.erro">
-      {{erro.mensagem}}
-      </span>
-      </ng-container>
-    </ion-item>
-
-    <br>
-    <ion-button expand="block" color="primary" type="submit">LOGIN!</ion-button>
-    <ion-button expand="block" fill="outline" color="primary" routerLink="/criar-conta">CRIAR CONTA</ion-button>
-
-   </form>
- </ion-card>
+            "Fim" Container-->
+      </ion-item>
+      <!--Fim ion item 1-->
+ 
+      <!--Ion item 2-->
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input formControlName="senha" type="password"></ion-input>
+        <ng-container *ngFor="let erro of mensagens_validacao.senha">
+          <span 
+          *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"
+          class="msg-erro">
+        {{erro.mensagem}}
+        </span>
+        </ng-container>
+      </ion-item>
+      <!--Ion item 2-->
+      <br>
+ 
+      <!--Botões-->
+      <ion-button expand="block" color="tertiary" type="submit">LOGIN!</ion-button>
+      <ion-button expand="block" fill="outline" color="tertiary" routerLink="/criar-conta">CRIAR CONTA</ion-button>
+    </form>
+ 
+  </ion-card>
 </ion-content>
